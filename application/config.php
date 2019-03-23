@@ -19,7 +19,7 @@ return [
     'extra_config_list' => ['database', 'route', 'validate'],
     //临时关闭日志写入
     'log' => [
-        'type' => 'test',
+        'type' => 'test1',
     ],
 
     'app_debug' => true,
