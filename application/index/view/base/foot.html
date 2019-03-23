@@ -1,0 +1,30 @@
+<div class="bot" style="position:relative;">
+	<div class="cac">
+		<div style="width: 80%;float: left;height: 100%;">
+			<p style="font-size: 18px;margin-top: 50px;margin-bottom: 25px;color: #666;">{$info.name}</p>
+			<p class="conc">
+				<span>邮箱：{$info.email}</span>
+				<span>传真：{$info.chuan}</span>
+				<span>地址：{$info.address}</span>
+			</p>
+			<p class="conc">
+				<span>
+					电话：{$info.tel}
+				</span>
+				<span>QQ：{$info.qq}</span>
+			</p>
+			<p style="font-size: 18px;margin-top: 60px;margin-bottom: 25px;color: #666;">友情链接</p>
+			<p class="conc">
+				{volist name="link" id="v"}
+				<a href="{$v.href}">{$v.title}</a>
+				{/volist}
+			</p>
+			<p style="height: 50px;width: 100%;border-top: 1px solid #e4e4e4;line-height: 50px;font-size: 14px;color: #666;"> 晋ICP备17003559     Copyright 2016 {$info.name}</p>
+		</div>
+		<div style="width: 20%;float: left;height: 100%;text-align: center;">
+			<img src="__STATIC__/index/img/code.jpg" style="width: 135px;margin: 80px auto 15px auto;"/>
+			<p style="color: #666;">扫一扫关注我们</p>
+		</div>
+
+	</div>
+</div>

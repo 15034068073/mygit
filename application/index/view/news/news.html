@@ -1,0 +1,93 @@
+<title>华仕集团</title>
+
+{include file="base/head"}
+	<!-- 导航 -->
+		<div class="bighead">
+			<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+				<div class="left">
+					<img src="__STATIC__/index/img/HSCT.png"/>
+					<div class="lang" style="width: 100px;float: right;line-height: 54px;">
+						<img src="__STATIC__/index/img/earth.png"/>
+						<span style="font-size: 14px;">请选择语言</span>
+					</div>
+				</div>
+		 	</div>
+			<div class="head">
+			 	<ul class="olist">
+			 		<li><a href="{:url('index/index')}">首页</a></li>
+			 		<li><a href="{:url('about/about')}">关于华仕</a></li>
+			 		<li class="foca"><a href="{:url('news/news')}">新闻动态</a></li>
+			 		<li><a href="{:url('jishu/jishu')}">集团业务</a></li>
+			 		<li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+			 		<li><a href="{:url('job/job')}">人才理念</a></li>
+			 		<li><a href="{:url('contact/contact')}">联系我们</a></li>
+			 		<li><a href="http://112.2.7.76:8098">办公OA</a></li>
+			 	</ul>
+			 </div>   
+		</div>
+		<div class="tat">
+			<img src="__STATIC__/index/img/about.jpg"/>
+		</div>
+		<div class="sit">
+			<p>您的位置：<a href="{:url('index/index')}">首页</a> > <a href="{:url('news/news')}">新闻动态</a></p>
+		</div>
+		<div class="type">
+			<div id="all" class="">
+				<a href="{:url('news/news')}">
+					全部
+				</a>
+			</div>
+			{volist name="type" id="v"}
+			<div class="<?php if($v['id']==$cat_id){echo "focus";} ?>">
+			
+				<a href="{:url('news/news',['id'=>$v['id']])}">
+					{$v.name}
+				</a>
+			</div>
+			{/volist}
+			
+		</div>
+		<script>
+			$(function(){
+				//alert(window.location);
+				if(String(window.location).indexOf("id") <= 0){
+					$("#all").addClass('focus');
+				}
+			})
+			
+		</script>
+		<div class="title">
+			<p class="china">新闻动态</p>
+			<p class="eng">NEWS</p>
+			<P class="bor"></P>
+		</div>
+		<ul class="newslists">
+			{volist name="news" id="v"}
+			<li>
+				<div class="newsimg">
+					<img src="{$v.img}"/>
+				</div>
+				<div class="article">
+					<div class="time">
+						<p class="year"><?php echo substr($v['add_time'],0,4); ?></p>
+						<p class="date"><?php echo substr($v['add_time'],5,5); ?></p>
+					</div>
+					<div class="nrr">
+						<p class="tita">
+							<a href="{:url('news/detail',['id'=>$v['id']])}">{$v.title}</a>
+						</p>
+						<p class="injs">
+							<?php echo subtext(strip_tags( $v['content']),30);?>
+						</p>
+					</div>
+				</div>
+			</li>
+			{/volist}
+		</ul>
+		
+			{$news->render()}
+		<!--加分页-->
+		
+		{include file="base/foot"}
+	</body>
+</html>

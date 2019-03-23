@@ -1,0 +1,101 @@
+
+		<title>联系我们</title>
+		{include file="base/head"}
+		<div class="abouts">
+			<img src="__STATIC__/mobile/img/aboutus.jpg"/>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">联系我们</p>
+			<p class="eng_tit">CONTACT US</p>
+		</div>
+		
+		<div class="above">
+			<div style="width: 1200px;overflow: hidden;margin: 0 auto;">
+				<!--<div class="aleft">
+					<p class="gz">关注</p>
+					<img src="../___STATIC__/mobile/img/code.png"/>
+				</div>-->
+				<div class="aleft ss">
+					<p class="onep">{$info.name}</p>	
+					<p>邮编：{$info.postcode}</p>	
+					<p>邮箱：{$info.email}</p>
+				</div>
+				<div class="aleft ss">
+					<p class="onep">地址：{$info.address}
+					<p>电话：{$info.tel}</p>
+					<p>传真：{$info.chuan}</p>	
+				</div>
+			</div>
+		</div>
+		<form action="{:url('contact/liuyan')}" method="post" id="form">
+			<div class="add">
+				<div class="inp">
+					<span>姓名</span>
+					<input type="text" name="name" id="name"/>
+				</div>
+				<div class="inp">
+					<span>邮箱</span>
+					<input type="text" name="email" id="email"/>
+				</div>
+				<div class="inp">
+					<span>电话</span>
+					<input type="text" name="tel" id="tel"/>
+				</div>
+				<div class="text">
+					<p>内容</p>
+					<textarea name="content" id="content"></textarea>
+				</div>
+				
+				<button class="sub">提交</button>
+				
+			</div>
+		</form>
+		{include file="base/foot"}
+	</body>
+</html>
+<script>
+	$(function(){
+		$(".sub").click(function(){
+			// var sex=$("#sex").val();
+			// var age='';
+			var name=$("#name").val();
+			var tel=$("#tel").val();
+			var email=$("#email").val();
+			var content=$("#content").val();
+			var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
+			var pattern = /^[\u4e00-\u9fa5]+$/;
+			if(name ==""){
+				alert("请填写姓名");
+				return false;
+			}
+
+			if(!pattern.test(name)){
+				alert("姓名必须为中文");
+				return false;
+			}
+			if(email==""){
+				alert("请输入邮箱");
+				return false;
+			}
+			if(tel==""){
+				alert("请填写手机号码");	
+				return false;
+			}
+			if(tel.length !=11){
+			   alert("请输入有效的11位手机号码");
+			   return false;
+			}
+			if(!myreg.test(tel)){
+	       	 	alert("请输入正确的手机号码");
+			 	return false;
+			}
+			
+			if(content==""){
+				alert("请输入内容");
+				return false;
+			}
+			$("#form ").submit()
+		})
+	})
+</script>

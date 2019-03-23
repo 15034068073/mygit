@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>华仕集团</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="shortcut icon" href="__STATIC__/index/img/LOGO1-3.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/commom.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/jq22-demo.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/styles.css"/>
+    <script src="__STATIC__/index/js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		!function (global, undefind) {
+				var browser = {
+					version: function () {
+						var ua = navigator.userAgent, app = navigator.appVersion;
+						return {
+							trident: ua.indexOf('Trident') > -1, //IE内核
+							presto: ua.indexOf('Presto') > -1, //opera内核
+							webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+							gecko: ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') === -1, //火狐内核
+							mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+							ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+							android: ua.indexOf('Android') > -1 || ua.indexOf('Linux') > -1, //android终端或uc浏览器
+							iPhone: ua.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+							iPad: ua.indexOf('iPad') > -1, //是否iPad
+							webApp: ua.indexOf('Safari') === -1, //是否web应该程序，没有头部与底部
+							weChat: ua.indexOf('MicroMessenger') > -1//判断是否为微信打开
+						}
+					}(),
+					language: (navigator.browserLanguage || navigator.language).toLowerCase()
+				};
+
+
+				   if (browser.version.mobile) {
+					   global.location.href = "{:url('mobile/index/index')}"
+				   }
+			}(window);
+					mui('body').on('click','a',function(){
+					window.top.location.href=this.href;
+					});
+
+
+	</script>
+</head>
+<body>
+	<div id="view">
+		<div id="frame">
+			<div class="op-section first">
+				<div class="bighead">
+					<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+						<div class="left">
+							<img src="__STATIC__/index/img/HSCT.png"/>
+							<div class="lang" style="width: 100px;float: right;line-height: 54px;">
+								<img src="__STATIC__/index/img/earth.png"/>
+								<span style="font-size: 14px;">请选择语言</span>
+							</div>
+						</div>
+				 	</div>
+					<div class="head">
+					 	<ul class="olist">
+					 		<li class="foca"><a href="{:url('index/index')}">首页</a></li>
+					 		<li><a href="{:url('about/about')}">关于华仕</a></li>
+					 		<li><a href="{:url('news/news')}">新闻动态</a></li>
+					 		<li><a href="{:url('jishu/jishu')}">集团业务</a></li>
+					 		<li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+					 		<li><a href="{:url('job/job')}">人才理念</a></li>
+					 		<li><a href="{:url('contact/contact')}">联系我们</a></li>
+					 		<li><a href="http://112.2.7.76:8098">办公OA</a></li>
+					 	</ul>
+					 </div>
+				</div>
+
+
+				 <!--lunbo-->
+				<div class="banner">
+				  <div class="b-img">
+				  	{volist name="banner" id="v"}
+					  <a href="{$v.href}" style="background:url({$v.img}) center no-repeat;background-size: 100% 100%;"></a>
+					{/volist}
+				  </div>
+				  <div class="b-list"></div>
+				  <a class="bar-left" href="#"><em></em></a><a class="bar-right" href="#"><em></em></a>
+				</div>
+			</div>
+
+			<div class="op-section second">
+				<div class="news" style="margin-top: 120px;">
+					<div class="one">
+						<p class="chinese">新闻动态</p>
+						<p class="eng">News</p>
+					</div>
+					<div class="two">
+						{volist name="news1" id="v"}
+						<div class="detail ff">
+							<div class="lefta">
+
+								<p class="dd"><?php echo substr($v['add_time'],5,5); ?></p>
+								<p class="yy"><?php echo substr($v['add_time'],0,4); ?></p>
+							</div>
+							<div class="righta">
+								<div class="imgs">
+									<a href="{:url('news/detail')}"><img src="{$v.img}"/></a>
+								</div>
+								<a href="{:url('news/detail',['id'=>$v['id']])}">
+									<p class="tit">{$v.title}</p>
+								</a>
+								<a href="{:url('news/detail',['id'=>$v['id']])}"><p class="nr"><?php echo subtext(strip_tags( $v['content']),90);?></p></a>
+								<div class="more">
+									<a href="{:url('news/news')}">MORE  > </a>
+								</div>
+							</div>
+						</div>
+						{/volist}
+					</div>
+
+					<div class="newslist">
+						<div class="long"></div>
+						<div class="nna">
+							{volist name="news2" id="v"}
+							<div class="aNew">
+								<div class="times">
+									<p class="dd"><?php echo substr($v['add_time'],5,5); ?></p>
+									<p class="yy"><?php echo substr($v['add_time'],0,4); ?></p>
+								</div>
+								<div class="newr">
+									<a href="{:url('news/detail',['id'=>$v['id']])}"><p class="tit">{$v.title}</p></a>
+									<a href="{:url('news/detail',['id'=>$v['id']])}"><p class="nr"><?php echo subtext(strip_tags( $v['content']),90);?></p></a>
+									<div class="hb"></div>
+								</div>
+								<div class="hb"></div>
+							</div>
+							{/volist}
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="op-section third">
+				<div class="news">
+					<div class="cont">
+						<div class="leftc">
+							<img src="{$intro.img}"/>
+						</div>
+						<div class="rightc">
+							<p class="about">关于我们</p>
+							<p class="abouteng">About us</p>
+							<p class="us"><?php echo subtext(strip_tags( $intro['intro']),250);?>
+							</p>
+							<div class="aboutmore">
+								<a href="{:url('about/about')}">MORE</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="op-section third">
+				<div class="news">
+					<ul class="js">
+						{volist name="jishu" id="v"}
+						<li>
+							<div class="big">
+								<div class="pic">
+									<img src="{$v.img}"/>
+								</div>
+								<div class="name">
+									<p class="cc">{$v.name}</p>
+									<p class="ee">{$v.english}</p>
+								</div>
+								<div class="jj">
+									{$v.intro}
+								</div>
+								<div class="mm">
+									<a href="{:url('jishu/jishu',['id'=>$v['id']])}"> ＞ </a>
+								</div>
+							</div>
+						</li>
+						{/volist}
+					</ul>
+				</div>
+			</div>
+
+			<div class="op-section" style="position: relative;">
+				<!-- <div class="news">
+					<div class="top">
+						<div class="bigg">
+							<div class="com">
+								<p class="cc">产学研联盟</p>
+								<p class="ee">Research Alliances </p>
+							</div>
+							<ul class="logos">
+								{volist name="school" id="v"}
+								<li>
+									<img src="{$v.img}"/>
+								</li>
+								{/volist}
+							</ul>
+						</div>
+					</div>
+					<div class="bigg">
+						<ul class="logos">
+							{volist name="school1" id="v"}
+							<li>
+								<img src="{$v.img}"/>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+				</div> -->
+
+				<div class="bot">
+					<div class="cac">
+						<div style="width: 80%;float: left;height: 100%;">
+							<p style="font-size: 18px;margin-top: 50px;margin-bottom: 25px;color: #666;">{$info.name}</p>
+							<p class="conc">
+								<span>邮箱：{$info.email}</span>
+								<span>传真：{$info.chuan}</span>
+								<span>地址：{$info.address}</span>
+							</p>
+							<p class="conc">
+								<span>
+									电话：{$info.tel}
+								</span>
+								<span>QQ：{$info.qq}</span>
+							</p>
+							<p style="font-size: 18px;margin-top: 60px;margin-bottom: 25px;color: #666;">友情链接</p>
+							<p class="conc">
+								{volist name="link" id="v"}
+								<a href="{$v.href}">{$v.title}</a>
+								{/volist}
+							</p>
+							<p style="height: 50px;width: 100%;border-top: 1px solid #e4e4e4;line-height: 50px;font-size: 14px;color: #666;"> 晋ICP备17003559     Copyright 2016 {$info.name}</p>
+						</div>
+						<div style="width: 20%;float: left;height: 100%;text-align: center;">
+							<img src="__STATIC__/index/img/code.jpg" style="width: 135px;margin: 80px auto 15px auto;"/>
+							<p style="color: #666;">扫一扫关注我们</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div id="radioWrap">
+		<ul id="radio">
+			<li>section1</li>
+			<li>section2</li>
+			<li>section3</li>
+			<li>section2</li>
+			<li>section3</li>
+		</ul>
+		<span id="radioOn"></span>
+	</div>
+	<script src="__STATIC__/index/js/onepage.js"></script>
+	<script>
+
+
+		$(document).ready(function(){
+			startOnePage({
+				frame: "#view",
+				container: "#frame",
+				sections: ".op-section",
+				radio: "#radio",
+				radioOn: "#radioOn",
+				speed: 500,
+				easing: "swing"
+			});
+		});
+
+
+	</script>
+	<script src="__STATIC__/index/js/banner.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var hh=$(window).height();
+		$('.banner').css('height',hh-100);
+		$('.news').css('height',hh-100);
+
+		var sh=$('.news .newslist').height();
+		var bh=$('.news .newslist .nna').height();
+		$('.news .newslist .nna').css('margin-top',(sh-bh)/2);
+
+
+		$('.news .newslist .aNew').hover(function(){
+			//event.preventDefault();
+			$('.news .two .detail').eq($(this).index()).addClass('ff').siblings().removeClass('ff');
+			});
+
+
+		$('.news .js li').hover(function(){
+			$(this).addClass('foc').siblings().removeClass('foc');
+		})
+	</script>
+</body>
+</html>

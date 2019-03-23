@@ -1,0 +1,162 @@
+<title>华仕集团</title>
+
+	{include file="base/head"}
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
+		<!-- 导航 -->
+		<div class="bighead">
+		<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+			<div class="left">
+				<img src="__STATIC__/index/img/HSCT.png"/>
+				<div class="lang" style="width: 100px;float: right;line-height: 54px;">
+					<img src="__STATIC__/index/img/earth.png"/>
+					<span style="font-size: 14px;">请选择语言</span>
+				</div>
+			</div>
+	 	</div>
+		<div class="head">
+		 	<ul class="olist">
+			 		<li><a href="{:url('index/index')}">首页</a></li>
+			 		<li><a href="{:url('about/about')}">关于华仕</a></li>
+			 		<li><a href="{:url('news/news')}">新闻动态</a></li>
+			 		<li><a href="{:url('jishu/jishu')}">集团业务</a></li>
+			 		<li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+			 		<li><a href="{:url('job/job')}">人才理念</a></li>
+			 		<li class="foca"><a href="{:url('contact/contact')}">联系我们</a></li>
+			 		<li><a href="http://112.2.7.76:8098">办公OA</a></li>
+			 	</ul>
+			 </div>
+		</div>
+		<div class="tat">
+			<img src="__STATIC__/index/img/about.jpg"/>
+		</div>
+		<div class="sit">
+			<p>您的位置：<a href="{:url('index/index')}">首页</a> > <a href="{:url('contact/contact')}">联系我们</a></p>
+		</div>
+		<div class="title">
+			<p class="china">联系我们</p>
+			<p class="eng">CONTACT US</p>
+			<P class="bor"></P>
+		</div>
+
+		<div class="above">
+			<div style="width: 1200px;overflow: hidden;margin: 0 auto;">
+				<div class="aleft">
+					<p class="gz">关注</p>
+					<img src="__STATIC__/index/img/code.jpg" style="width: 344px;"/>
+				</div>
+				<div class="aleft ss">
+					<p class="onep">{$info.name}</p>
+					<p>邮编：{$info.postcode}</p>
+					<p>邮箱：{$info.email}</p>
+				</div>
+				<div class="aleft ss">
+					<p class="onep">地址：{$info.address}
+					<p>电话：{$info.tel}</p>
+					<p>传真：{$info.chuan}</p>
+				</div>
+				<div id="map" style="width: 67%;float: right;">
+				    <div style="width: 100%; height: 300px;margin: 0 auto;" id="allmap"></div>
+				</div>
+			</div>
+		</div>
+
+		<form action="{:url('contact/liuyan')}" method="post" id="form">
+			<div class="add">
+				<div class="inp">
+					<span>姓名</span>
+					<input type="text" name="name" id="name"/>
+				</div>
+				<div class="inp">
+					<span>电话</span>
+					<input type="text" name="tel" id="tel"/>
+				</div>
+				<div class="inp">
+					<span>邮箱</span>
+					<input type="text" name="email" id="email"/>
+				</div>
+
+				<div class="text">
+					<p>内容</p>
+					<textarea name="content"></textarea>
+				</div>
+
+				<button  class="sub">提交</button>
+
+			</div>
+		</form>
+		{include file="base/foot"}
+	</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        ShowMap('112.625092,37.727723', '', '山西转型综改区科技创新城经一路6号', '0351-5607666', '0351-5228898', '20');
+    })
+    function getInfo(id) {
+        $.ajax({
+            type: "POST",
+            url: "WebUserControl/Contact/GetInfo.ashx",
+            cache: false,
+            async: false,
+            data: { ID: id },
+            success: function (data) {
+                data = eval(data);
+                var length = data.length;
+                if (length > 0) {
+                    ShowMap(data[0]["Image"], data[0]["NewsTitle"], data[0]["Address"], data[0]["Phone"], data[0]["NewsTags"], data[0]["NewsNum"]);
+                }
+            }
+        });
+    }
+    function ShowMap(zuobiao, name, addrsee, phone, chuanzhen, zoom) {
+        var arrzuobiao = zuobiao.split(',');
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(arrzuobiao[0], arrzuobiao[1]), zoom);
+        map.addControl(new BMap.NavigationControl());
+        var marker = new BMap.Marker(new BMap.Point(arrzuobiao[0], arrzuobiao[1]));
+        map.addOverlay(marker);
+        var infoWindow = new BMap.InfoWindow('<p style="color: #bf0008;font-size:14px;">' + name + '</p><p>地址：' + addrsee + '</p><p>电话：' + phone + '</p><p>传真：' + chuanzhen + '</p>');
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+        });
+        marker.openInfoWindow(infoWindow);
+    }
+</script>
+<script>
+	$(function(){
+		$(".sub").click(function(){
+			// var sex=$("#sex").val();
+			// var age='';
+			var name=$("#name").val();
+			var tel=$("#tel").val();
+			var email=$("#email").val();
+			var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
+			var pattern = /^[\u4e00-\u9fa5]+$/;
+			if(name ==""){
+				alert("请填写姓名");
+				return false;
+			}
+
+			if(!pattern.test(name)){
+				alert("姓名必须为中文");
+				return false;
+			}
+			if(tel==""){
+				alert("请填写手机号码");
+				return false;
+			}
+			if(tel.length !=11){
+			   alert("请输入有效的11位手机号码");
+			   return false;
+			}
+			if(!myreg.test(tel)){
+	       	 	alert("请输入正确的手机号码");
+			 	return false;
+			}
+			if(email==""){
+				alert("请输入邮箱");
+				return false;
+			}
+			$("#form ").submit()
+		})
+	})
+</script>

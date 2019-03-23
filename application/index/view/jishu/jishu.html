@@ -1,0 +1,83 @@
+<title>华仕集团</title>
+
+{include file="base/head"}
+	<!-- 导航 -->
+		<div class="bighead">
+			<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+				<div class="left">
+					<img src="__STATIC__/index/img/HSCT.png"/>
+					<div class="lang" style="width: 100px;float: right;line-height: 54px;">
+						<img src="__STATIC__/index/img/earth.png"/>
+						<span style="font-size: 14px;">请选择语言</span>
+					</div>
+				</div>
+		 	</div>
+			<div class="head">
+			 	<ul class="olist">
+			 		<li><a href="{:url('index/index')}">首页</a></li>
+			 		<li><a href="{:url('about/about')}">关于华仕</a></li>
+			 		<li><a href="{:url('news/news')}">新闻动态</a></li>
+			 		<li class="foca"><a href="{:url('jishu/jishu')}">集团业务</a></li>
+			 		<li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+			 		<li><a href="{:url('job/job')}">人才理念</a></li>
+			 		<li><a href="{:url('contact/contact')}">联系我们</a></li>
+			 		<li><a href="http://112.2.7.76:8098">办公OA</a></li>
+			 	</ul>
+			 </div>   
+		</div>
+		<div class="tat">
+			<img src="__STATIC__/index/img/about.jpg"/>
+		</div>
+		<div class="sit">
+			<p>您的位置：<a href="{:url('index/index')}">首页</a> > <a href="{:url('jishu/jishu')}">技术领域</a></p>
+		</div>
+		<div class="type">
+			{volist name="type" id="v"}
+			<div class="<?php if($v['id']==$cat_id){echo "focus";} ?>">
+				<a href="{:url('jishu/jishu',['id'=>$v['id']])}">
+					{$v.name}
+				</a>
+			</div>
+			{/volist}
+		</div>
+		<div class="title">
+			<p class="china">技术领域</p>
+			<p class="eng">TECHNICAL FIELD</p>
+			<P class="bor"></P>
+		</div>
+		
+		<ul class="art">
+			{volist name="articles" id="v"}
+			<li>
+				<a href="{:url('jishu/detail',['id'=>$v['id']])}">
+				<div class="techimgs">
+					<img src="{$v.img}"/>
+				</div>
+				<div class="ww">
+					<p class="names">{$v.title}</p>
+					<p class="how">{$v.keyword}</p>
+				</div>
+				<div class="fun">
+					<p class="funname">{$v.title}</p>
+					<p class="function">
+						<?php echo subtext(strip_tags( $v['content']),100);?>
+					</p>
+				</div>
+				</a>
+			</li>
+			{/volist}
+			
+		</ul>
+		{$articles->render()}
+		{include file="base/foot"}
+	</body>
+</html>
+<script>
+	$(function(){
+		//alert(window.location);
+		if(String(window.location).indexOf("id") <= 0){
+			$(".type div").eq(0).addClass('focus');
+		}
+	})
+	
+</script>

@@ -1,0 +1,49 @@
+
+		<title>新闻动态</title>
+		{include file="base/head"}
+
+		<div class="abouts">
+			<img src="__STATIC__/mobile/img/abouts.jpg"/>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">新闻动态</p>
+			<p class="eng_tit">NEWS INFORMATION</p>
+		</div>
+		<div class="type">
+			<a href="{:url('news/news')}" id="all" class="">全部</a>
+			{volist name="type" id="v"}
+			<a href="{:url('news/news',['id'=>$v['id']])}" class="<?php if($v['id']==$cat_id){echo "focus";} ?>">集团新闻</a>
+			{/volist}
+		</div>
+		<script>
+			$(function(){
+				//alert(window.location);
+				if(String(window.location).indexOf("id") <= 0){
+					$("#all").addClass('focus');
+				}
+			})
+			
+		</script>
+		<ul class="news">
+			{volist name="news" id="v"}
+			<li>
+				<a href="{:url('news/detail',['id'=>$v['id']])}">
+					<div class="oimg">
+						<img src="{$v.img}"/>
+					</div>
+					<div class="opxt">
+						<p class="newtit">{$v.title}</p>
+						<p class="time"><span class="date"><?php echo substr($v['add_time'],5,5); ?></span><span class="year"><?php echo substr($v['add_time'],0,4); ?></span></p>
+						<p class="newdet"><?php echo subtext(strip_tags( $v['content']),34);?></p>
+					</div>
+				</a>
+			</li>
+			{/volist}
+		</ul>
+		
+		{$news->render()}
+
+		{include file="base/foot"}
+	</body>
+</html>

@@ -1,0 +1,99 @@
+		<title>首页</title>
+		{include file="base/head"}
+
+		</div>
+		<div class="banner">
+			<a href="##">
+				<img src="__STATIC__/mobile/img/banner.jpg"/>
+			</a>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">新闻动态</p>
+			<p class="eng_tit">NEWS</p>
+		</div>
+		
+		<ul class="newslist">
+			{volist name="news" id="v"}
+			<li>
+				<a href="{:url('news/detail',['id'=>$v['id']])}">
+					<p class="time">
+						<span class="date"><?php echo substr($v['add_time'],5,5); ?></span>
+						<span class="year"><?php echo substr($v['add_time'],0,4); ?></span>
+					</p>
+					<p class="tit_name">{$v.title}</p>
+					<p class="tit_det"><?php echo subtext(strip_tags( $v['content']),76);?></p>
+				</a>
+			</li>
+			{/volist}
+		</ul>
+		
+		<div class="about">
+			<div class="title">
+				<p class="chinese_tit">关于我们</p>
+				<p class="eng_tit">ABOUT US</p>
+			</div>
+			<p class="aboutus"><?php echo subtext(strip_tags( $intro['intro']),220);?></p>
+			<div class="more">
+				<a href="{:url('about/about')}">MORE</a>
+			</div>
+			<img src="{$intro.img}"/>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">技术领域</p>
+			<p class="eng_tit">TECHNOLOGY</p>
+		</div>
+		<ul class="technology">
+			{volist name="jishu" id="v"}
+			<li>
+				<a href="{:url('jishu/jishu',['id'=>$v['id']])}">
+					<div class="imgs">
+						<img src="{$v.img}"/>
+					</div>
+					<div class="opa">
+						<p>{$v.name}</p>
+						<p>{$v.english}</p>
+					</div>
+				</a>
+			</li>
+			{/volist}
+		</ul>
+		<div class="research">
+			<div class="title">
+				<p class="chinese_tit">产学研联盟</p>
+				<p class="eng_tit">RESEARCH ALLIANCES</p>
+			</div>
+			<ul class="logs">
+				{volist name="school" id="s"}
+				<li style="border-right: 1px solid #f5f5f5;">
+					<img src="{$s.img}"/>
+				</li>
+				{/volist}
+				<!-- <li style="border-right: 1px solid #f5f5f5;">
+					<img src="__STATIC__/mobile/img/logo(2).png"/>
+				</li>
+				<li>
+					<img src="__STATIC__/mobile/img/logo.png"/>
+				</li> -->
+			</ul>
+			<ul class="logs" style="border: none;">
+				{volist name="school1" id="v"}
+				<li style="border-right: 1px solid #f5f5f5;">
+					<img src="{$v.img}"/>
+				</li>
+				{/volist}
+				<!-- <li style="border-right: 1px solid #f5f5f5;">
+					<img src="__STATIC__/mobile/img/pkulogo_grey.png"/>
+				</li>
+				<li>
+					<img src="__STATIC__/mobile/img/logo(2).png"/>
+				</li> -->
+			</ul>
+		</div>
+		
+		{include file="base/foot"}
+		
+	</body>
+	
+</html>

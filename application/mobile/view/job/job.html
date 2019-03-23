@@ -1,0 +1,36 @@
+
+		<title>诚聘英才</title>
+		{include file="base/head"}
+
+		<div class="abouts">
+			<img src="__STATIC__/mobile/img/abouts.jpg"/>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">诚聘英才</p>
+			<p class="eng_tit">RECRUITMENT</p>
+		</div>
+		<div class="type">
+			{volist name="job" id="v"}
+				<a href="{:url('job/job',['id'=>$v['id']])}" class="<?php if($v['id']==$id){echo "focus";} ?>">
+					{$v.title}
+				</a>
+			{/volist}
+		</div>
+		
+		<div class="job">
+			{$content}
+			
+		</div>
+		{include file="base/foot"}
+	</body>
+</html>
+<script>
+	$(function(){
+		//alert(window.location);
+		if(String(window.location).indexOf("id") <= 0){
+			$(".type a").eq(0).addClass('focus');
+		}
+	})
+	
+</script>

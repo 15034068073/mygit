@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布招聘列表</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__STATIC__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__STATIC__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__STATIC__/admin/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="__STATIC__/admin/css/animate.min.css" rel="stylesheet">
+    <link href="__STATIC__/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="__STATIC__/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>发布招聘列表</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="form-group clearfix col-sm-1" style="width:200px;">
+            	<a href="{:url('add')}" style="float:left;"><button class="btn btn-outline btn-primary" type="button">新增</button></a>
+                <a href="{:url('summary')}" style="float:left;"><button class="btn btn-outline btn-primary" type="button">招聘信息</button></a>
+				</div>
+            <!--搜索框开始-->
+            <form  method="get" class="form-inline pull-right">
+                <div class="content clearfix m-b">
+                    <div class="form-group">
+                        <label>标题：</label>
+                        <input type="text" class="form-control" id="title" name="search">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" style="margin-top:5px" id="search"><strong>搜 索</strong>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!--搜索框结束-->
+			<div style="clear:both;"></div>
+			<style>
+				table{
+				}
+				tr{
+					padding:100px 0;
+				}
+				.th0{
+					width:1%;
+				}
+				.th1{
+					width:5%;
+				}
+				.th2{
+					width:10%;
+				}
+
+			</style>
+            <div class="example-wrap">
+                <div class="example fixed-table-container">
+                    <table id="cusTable" class="table table-hover table-striped">
+                        <thead>
+                        <th class="th1">ID</th>
+                        <th class="th1">名称</th>
+                        <th class="th1">英文名称</th>
+                        <th class="th1">缩略图</th>
+                        <th class="th1">操作</th>
+                        </thead>
+                        {volist name="res" id="vo" key="key"}
+							<tr class="ccc shanchu{$vo.id}">
+								<td>
+									<span style="display:block; float:left;" >&nbsp;&nbsp;&nbsp;{$key}</span>
+								</td>
+                                <td>{$vo.title}</td>
+                                <td>{$vo.english_title}</td>
+                                <th class="th1">
+                                    {if condition="$vo['img'] neq ''"}
+                                        <img src="__STATIC__/{$vo.img}" style="height:100px;">
+                                    {/if}
+                                </th>
+								<td class="th2">
+									<a href="{:url('edit',['id'=>$vo['id']])}"><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-paste"></i> 修改</button></a>
+									<button type="button" onclick="del(this,'{$vo.id}','zptype')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> 删除</button>
+								</td>
+							</tr>
+						{/volist}
+                    </table>
+                </div>
+            </div>
+
+            <!-- End Example Pagination -->
+        </div>
+        <div style="float:right; margin-right:50px;"></div>
+    </div>
+</div>
+
+<!-- End Panel Other -->
+</div>
+<script src="__STATIC__/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="__STATIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="__STATIC__/admin/js/content.min.js?v=1.0.0"></script>
+<script src="__STATIC__/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="__STATIC__/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="__STATIC__/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="__STATIC__/admin/js/plugins/layer/laydate/laydate.js"></script>
+<script src="__STATIC__/admin/js/plugins/layer/layer.min.js"></script>
+<script>
+function del(obj,id,table){
+	if (confirm('确定删除吗？') === false) {
+		return false;
+	}
+	$.post(
+		"{:url('Base/del')}",
+		{'id':id,'table':table},
+		function(data){
+			if(data){
+			$(obj).parent().parent().remove();
+			} else {
+				alert("删除失败")
+			}
+		},
+		'json'
+	)
+}
+
+function changestatus(obj, id, table){
+	var status = $(obj).attr('status');
+	$.post(
+			"{:url('Base/changestatus')}",
+			{'id':id,'table':table,'status':status},
+			function(data){
+				if(data){
+				$(obj).attr('status',data.status);
+				$(obj).attr('src','__STATIC__'+data.src)
+				} else {
+					alert("操作失败")
+				}
+			},
+			'json'
+		)
+}
+
+    $(function(){
+        $("#firstcategory").change(function() {
+            var id = $(this).find('option:selected').val();
+            $.post(
+                "{:url('getcategory')}",
+                {'id':id},
+                function(data) {
+                    var str = '<option value="0">选择</option>';
+                    if (data.length > 0) {
+                        for (var i=0; i < data.length; i++) {
+                            str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>"
+                        }
+                    }
+                    $("#secondcategory").html(str);
+                },
+                'json'
+            )
+        });
+    })
+</script>
+</body>
+</html>

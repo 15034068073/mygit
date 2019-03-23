@@ -1,0 +1,51 @@
+
+		<title>技术领域</title>
+		{include file="base/head"}
+
+		<div class="abouts">
+			<img src="__STATIC__/mobile/img/tech.jpg"/>
+		</div>
+		
+		<div class="title">
+			<p class="chinese_tit">技术领域</p>
+			<p class="eng_tit">TECHNICAL FIELD</p>
+		</div>
+		<div class="type">
+			{volist name="type" id="v"}
+			<a href="{:url('jishu/jishu',['id'=>$v['id']])}" class="<?php if($v['id']==$cat_id){echo "focus";} ?>">{$v.name}</a>
+			{/volist}
+		</div>
+		<script>
+			$(function(){
+				//alert(window.location);
+				if(String(window.location).indexOf("id") <= 0){
+					$(".type a").eq(0).addClass('focus');
+				}
+			})
+			
+		</script>
+		<ul class="art">
+			{volist name="articles" id="v"}
+			<li>
+				<a href="{:url('jishu/detail',['id'=>$v['id']])}">
+					<div class="techimgs">
+						<img src="{$v.img}"/>
+					</div>
+					<div class="ww">
+						<p class="names">{$v.title}</p>
+						<p class="how">{$v.keyword}</p>
+					</div>
+					
+				</a>
+			</li>
+			{/volist}
+		</ul>
+		{$articles->render()}
+		{include file="base/foot"}
+	</body>
+	<script type="text/javascript">
+		// $('.art li').click(function(){
+		// 	$(this).children('.fun').show();
+		// })
+	</script>
+</html>

@@ -1,0 +1,113 @@
+<title>华仕集团</title>
+{include  file="base/head"}
+		<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/head.css"/>
+		<style type="text/css">
+			.next{
+				width: 100%;
+				height: 80px;
+				border-bottom: 1px solid;
+			}
+			
+			.next .nextArt{
+				margin-top: 45px;
+				padding-bottom: 13px;
+				display: inline-block;
+				border-bottom: 3px solid #cccccc;
+				margin-right: 15px;
+			}
+			
+			.nn{
+				margin: 25px 0;
+			}
+			
+			.nn a{
+				font-size: 25px;
+			}
+		</style>
+		<div class="bighead">
+			<div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+				<div class="left">
+					<img src="__STATIC__/index/img/HSCT.png"/>
+					<div class="lang" style="width: 100px;float: right;line-height: 54px;">
+						<img src="__STATIC__/index/img/earth.png"/>
+						<span style="font-size: 14px;">请选择语言</span>
+					</div>
+				</div>
+		 	</div>
+			<div class="head">
+			 	<ul class="olist">
+			 		<li><a href="{:url('index/index')}">首页</a></li>
+			 		<li><a href="{:url('about/about')}">关于华仕</a></li>
+			 		<li><a href="{:url('news/news')}">新闻动态</a></li>
+			 		<li class="foca"><a href="{:url('jishu/jishu')}">集团业务</a></li>
+			 		<li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+			 		<li><a href="{:url('job/job')}">人才理念</a></li>
+			 		<li><a href="{:url('contact/contact')}">联系我们</a></li>
+			 		<li><a href="http://112.2.7.76:8098">办公OA</a></li>
+			 	</ul>
+			 </div>   
+		</div>
+		<div class="tat">
+			<img src="__STATIC__/index/img/about.jpg"/>
+		</div>
+		<div class="sit">
+			<p>您的位置：<a href="{:url('index/index')}">首页</a> > <a href="{:url('jishu/jishu')}">技术领域</a></p>
+		</div>
+	 	
+	 	<div class="newNr" style="width: 1200px;overflow: hidden;margin: 0 auto;">
+	 		<p style="font-size: 22px;text-align: center;margin-top: 30px;">{$jishu.title}</p>
+	 		<p style="text-align: center;margin-top: 20px;margin-bottom: 40px;"><span>{$jishu.add_time}</span><span>浏览：{$jishu.page_view}次</span></p>
+	 		<div class="bdsharebuttonbox" style="float: right;margin-top: -55px;">  
+	 			<span style="float: left;margin-right: 5px;">分享到</span>
+				<a href="#" class="bds_more" data-cmd="more"></a>  
+				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>  
+				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>  
+				<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>  
+				<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>  
+				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>  
+			</div>
+			<div style="width: 100%;line-height: 20px;font-size: 14px;" class="nrr">
+				{$jishu.content}
+			</div>
+			<div class="next">
+				
+				<?php if(!empty($prev)){  ?>
+				<a href="{:url('jishu/detail',['id'=>$prev['id']])}" class="nextArt">阅读上一篇</a>
+				<?php } ?>
+				<?php if(!empty($next)){  ?>
+				<a href="{:url('jishu/detail',['id'=>$next['id']])}" >阅读下一篇</a>
+				<?php } ?>
+			</div>
+			<p class="nn">
+				<?php if(!empty($next)){  ?>
+				<a href="{:url('jishu/detail',['id'=>$next['id']])}">{$next.title}</a>	
+				<?php }else{ ?>
+				<a href="##">没有下一篇了</a>
+				<?php } ?>				
+			</p>
+
+	 	</div>
+	 	
+	 	{include file="base/foot"}
+	</body>
+	<script>  
+		window._bd_share_config={  
+		        "common":{  
+		            "bdPopTitle":"您的自定义pop窗口标题",  
+		            "bdSnsKey":{},  
+		            "bdText":"此处填写自定义的分享内容",   
+		            "bdMini":"2",  
+		            "bdMiniList":false,  
+		            "bdPic":"http://localhost/centlight/public/attachment/201410/24/14/5449ef39574f5_282x220.jpg", /* 此处填写要分享图片地址 */  
+		            "bdStyle":"0",  
+		            "bdSize":"16"  
+		            },  
+		        "share":{}  
+		};  
+		with(document)0[  
+            (getElementsByTagName('head')[0]||body).  
+            appendChild(createElement('script')).  
+            src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)  
+		];  
+        </script>  
+</html>

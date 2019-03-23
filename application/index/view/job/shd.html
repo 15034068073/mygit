@@ -1,0 +1,58 @@
+    <title>华仕集团</title>
+    {include file="base/head"}
+    <!-- 导航 -->
+        <div class="bighead">
+            <div style="width: 100%;border-bottom: 1px solid #f2f2f2;">
+                <div class="left">
+                    <img src="__STATIC__/index/img/HSCT.png"/>
+                    <div class="lang" style="width: 100px;float: right;line-height: 54px;">
+                        <img src="__STATIC__/index/img/earth.png"/>
+                        <span style="font-size: 14px;">请选择语言</span>
+                    </div>
+                </div>
+            </div>
+            <div class="head">
+                <ul class="olist">
+                    <li><a href="{:url('index/index')}">首页</a></li>
+                    <li><a href="{:url('about/about')}">关于华仕</a></li>
+                    <li><a href="{:url('news/news')}">新闻动态</a></li>
+                    <li><a href="{:url('jishu/jishu')}">集团业务</a></li>
+                    <li><a href="{:url('yeji/yeji')}">社会责任</a></li>
+                    <li class="foca"><a href="{:url('job/job')}">人才理念</a></li>
+                    <li><a href="{:url('contact/contact')}">联系我们</a></li>
+                    <li><a href="http://112.2.7.76:8098">办公OA</a></li>
+                </ul>
+             </div>
+        </div>
+        <div class="tat">
+            <img src="__STATIC__/index/img/about.jpg"/>
+        </div>
+        <div class="sit">
+            <p>您的位置：<a href="{:url('index/index')}">首页</a> > <a href="{:url('job/job')}">社会招聘</a></p>
+        </div>
+        <div class="type">
+            <div>
+                <a href="{:url('job/job')}">校园招聘</a>
+            </div>
+            <div class="focus">
+                <a href="{:url('job/sh')}">社会招聘</a>
+            </div>
+            <div>
+                <a href="{:url('job/zl')}">人才战略</a>
+            </div>
+        </div>
+        <div class="title">
+            <p class="china">社会招聘</p>
+            <p class="eng">SOCIAL RECRUITMENT</p>
+            <P class="bor"></P>
+        </div>
+
+        <div class="job">
+            <p class="tya">{$res.gangwei}</p>
+            <div class="list">
+                {$res.content}
+            </div>
+        </div>
+        {include file="base/foot"}
+    </body>
+</html>

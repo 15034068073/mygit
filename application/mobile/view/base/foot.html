@@ -1,0 +1,27 @@
+		<div class="footer">
+			<div class="cont">
+				<p style="font-size: 1.2rem;color: #333333;">{$info.name}</p>
+				<p>电话：{$info.tel}</p>         
+				<p>QQ：{$info.qq}</p>
+				<p>邮箱：{$info.email}</p>
+				<p>传真：{$info.chuan}  </p>
+				<p>地址：{$info.address}</p>
+			</div>
+			<div class="cont" style="margin-top: 1.5rem;">
+				<div class="lefta">
+					<p style="font-size: 1.2rem;color: #333333;">友情链接</p>
+					{volist name="link" id="v"}
+					<p><a href="{$v.href}">{$v.title}</a></p>
+					{/volist}
+				</div>
+				<div class="righta">
+					<img src="__STATIC__/mobile/img/code.png"/>
+					<p>扫一扫关注我们</p>
+				</div>
+			</div>
+			<div class="ff">
+				<p> 晋ICO备16003906号-1 Copyright 2016 </p>
+			</div>
+			
+		</div>
+<script src="__STATIC__/mobile/js/head.js" type="text/javascript" charset="utf-8"></script>
